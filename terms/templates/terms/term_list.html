@@ -10,63 +10,80 @@
 {% endblock %}
 
 {% block lsidebar %}
-<div class="sidebar-module">
-    <h4>Systems</h4>
-    <ol class="list-unstyled">
-        {% for obj in systems.all %}
-        <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
-        {% endfor %}
-    </ol>
-</div>
-<hr>
-<div class="sidebar-module">
-    <h4>Applications</h4>
-    <ol class="list-unstyled">
-        {% for obj in applications.all %}
-        <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
-        {% endfor %}
-    </ol>
-</div>
-<hr>
-<div class="sidebar-module">
-    <h4>Categories</h4>
-    <ol class="list-unstyled">
-        {% for obj in categories.all %}
-        <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
-        {% endfor %}
-    </ol>
-</div>
+    <div class="sidebar-module">
+        <h4>Systems</h4>
+        <ol class="list-unstyled">
+            {% for obj in systems.all %}
+                <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    <hr>
+    <div class="sidebar-module">
+        <h4>Applications</h4>
+        <ol class="list-unstyled">
+            {% for obj in applications.all %}
+                <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    <hr>
+    <div class="sidebar-module">
+        <h4>Categories</h4>
+        <ol class="list-unstyled">
+            {% for obj in categories.all %}
+                <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
+            {% endfor %}
+        </ol>
+    </div>
 {% endblock %}
 {% block rsidebar %}{% endblock %}
 
 {% block content %}
-<style>
-    .progress {
-        height: 5px;
-        margin-bottom: 0px;
-        overflow: hidden;
-        background-color: #F5F5F5;
-        border-radius: 4px;
-        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1) inset;
-    }
-</style>
+    <style>
+        .alpha-menu li {
+            margin-top: 0px;
+            list-style: outside none none;
+        }
 
+        .alpha-menu > li {
+            float: left;
+            width: 100px;
+            -height: 80px;
+            -font-size: 10px;
+            -line-height: 1.4;
+            -text-align: center;
+            background-color: transparent;
+            margin: 10px;
+            -border-radius: 10px;
+            border-bottom: 1px solid #a9a9a9;
+
+        }
+        .alpha-menu > li  h4:hover {
+            border-bottom: 1px solid #000000;
+        }
+        .alpha-menu > li  h4 {
+            border-bottom: 1px solid #a9a9a9;
+            width: 100px;
+        }
+
+    </style>
 
     {% regroup object_list by alphabet as terms %}
 
-<ul>
-{% for term in terms %}
-    <li>{{ term.grouper }}
-    <ul>
-        {% for item in term.list %}
-          <li>{{ item.short }}: {{ item.description }} {{ item }}</li>
+    <ul class="alpha-menu">
+        {% for term in terms %}
+            <li><a href=""><h4>{{ term.grouper }}</h4></a>
+                <ul>
+                    {% for item in term.list %}
+                        <li><a>{{ item.short }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
         {% endfor %}
     </ul>
-    </li>
-{% endfor %}
-</ul>
 
-{% comment %}
+    {% comment %}
 <div class="list-group">
     {% for obj in object_list %}
     <div class="media">
@@ -97,5 +114,5 @@
     {% endfor %}
 </div>
 {% endcomment %}
-{% include 'snippets/pagination.html' %}
+    {% include 'snippets/pagination.html' %}
 {% endblock %}
