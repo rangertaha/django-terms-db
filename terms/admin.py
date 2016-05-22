@@ -11,14 +11,16 @@ from .models import Term, Category
 logger = logging.getLogger(__name__)
 
 
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
-    search_fields = ('name', 'description')
+    list_display = ('name', )
+    search_fields = ('name', )
 
 
 @admin.register(Term)
 class TermAdmin(admin.ModelAdmin):
-    list_display = ('rank', 'code', 'title', 'description')
-    search_fields = ('rank', 'code', 'title', 'code', 'description')
+    list_display = ('short', 'long', 'description')
+    search_fields = ('short', 'long', 'description')
 

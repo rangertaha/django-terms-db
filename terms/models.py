@@ -26,17 +26,14 @@ ICONS = (
 
 
 class Category(models.Model):
-    rank = models.IntegerField(blank=True, null=True, default=0)
     slug = models.SlugField(max_length=32, unique=True, blank=True, null=True)
     name = models.CharField(max_length=32, blank=True, null=True)
-    icon = models.CharField(max_length=32, choices=ICONS, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
     count = models.IntegerField(default=0)
 
-    # category =
+    parent = models.ForeignKey('self', blank=True, related_name='children')
 
     class Meta:
-        ordering = ('rank', )
+        ordering = ('name', )
         verbose_name_plural = "Categories"
 
     def __unicode__(self):
@@ -44,16 +41,12 @@ class Category(models.Model):
 
 
 class Term(models.Model):
-    order = models.IntegerField(blank=True, null=True, default=0)
     rank = models.IntegerField(blank=True, null=True, default=0)
     slug = models.SlugField(max_length=512, unique=True, blank=True, null=True)
-    title = models.CharField(max_length=512, blank=True, null=True, db_index=True)
-    usage = models.TextField(blank=True, null=True, unique=True)
-    code = models.TextField(blank=True, null=True, unique=True)
-    example = models.TextField(blank=True, null=True, unique=True)
+    short = models.CharField(max_length=512, blank=True, null=True, db_index=True)
+    long = models.CharField(max_length=512, blank=True, null=True, db_index=True)
     description = models.TextField(blank=True, null=True)
 
-    terms = models.ManyToManyField('self', blank=True, related_name='parent')
     categories = models.ManyToManyField(Category, blank=True, related_name='terms')
 
     # Metadata
@@ -66,6 +59,16 @@ class Term(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def alphabet(self):
+        alphabet, created = Category.objects.get_or_create(name='alphabet')
+        if 0 < len(self.short) > 2:
+            cat1, created = Category.objects.get_or_create(name=self.short[0], parent=alphabet)
+            cat2, created = Category.objects.get_or_create(name=self.short[0], parent=alphabet)
+            if cat1 not in self.categories:
+                self.categories.add(cat1)
+            if cat2 not in self.categories:
+                self.categories.add(cat2)
 
 
 @receiver(pre_save, sender=Term)
