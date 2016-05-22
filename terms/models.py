@@ -7,30 +7,22 @@ from django.template.defaultfilters import slugify
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
-ICONS = (
-    ('fa-linux', 'Linux'),
-    ('fa-windows ', 'Windows'),
-    ('fa-apple', 'Apple'),
+ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+            'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+            'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-    ('fa-firefox', 'Firefox'),
-    ('fa-chrome ', 'Chrome'),
-    ('fa-internet-explorer', 'Internet Explorer'),
+def get_alphabet():
+    for a in ALPHABET:
+        for b in ALPHABET:
+            yield a+b
 
-    ('fa-file', 'Physical File'),
-    ('fa-file-o', 'Virtual File'),
-
-    ('fa-folder', 'Folder'),
-    ('fa-folder-o', 'Folder White'),
-
-)
+ALPHABET_CHOICES = tuple((a, a) for a in get_alphabet())
 
 
 class Category(models.Model):
     slug = models.SlugField(max_length=32, unique=True, blank=True, null=True)
     name = models.CharField(max_length=32, blank=True, null=True)
     count = models.IntegerField(default=0)
-
-    parent = models.ForeignKey('self', blank=True, related_name='children')
 
     class Meta:
         ordering = ('name', )
@@ -41,13 +33,14 @@ class Category(models.Model):
 
 
 class Term(models.Model):
+    alphabet = models.CharField(max_length=4, blank=True, null=True, choices=ALPHABET_CHOICES)
     rank = models.IntegerField(blank=True, null=True, default=0)
     slug = models.SlugField(max_length=512, unique=True, blank=True, null=True)
     short = models.CharField(max_length=512, blank=True, null=True, db_index=True)
     long = models.CharField(max_length=512, blank=True, null=True, db_index=True)
     description = models.TextField(blank=True, null=True)
 
-    categories = models.ManyToManyField(Category, blank=True, related_name='terms')
+    categories = models.ManyToManyField(Category, blank=True, null=True, related_name='terms')
 
     # Metadata
     created = models.DateTimeField(_('Created'), auto_now=True, auto_now_add=False)
@@ -60,22 +53,13 @@ class Term(models.Model):
     def __unicode__(self):
         return self.title
 
-    def alphabet(self):
-        alphabet, created = Category.objects.get_or_create(name='alphabet')
-        if 0 < len(self.short) > 2:
-            cat1, created = Category.objects.get_or_create(name=self.short[0], parent=alphabet)
-            cat2, created = Category.objects.get_or_create(name=self.short[0], parent=alphabet)
-            if cat1 not in self.categories:
-                self.categories.add(cat1)
-            if cat2 not in self.categories:
-                self.categories.add(cat2)
-
 
 @receiver(pre_save, sender=Term)
 def pre_term(sender, **kwargs):
     term = kwargs['instance']
     if not term.slug:
-        term.slug = slugify(term.title)
+        term.slug = slugify(term.long)
+        term.alphabet()
 
 
 @receiver(pre_save, sender=Category)
