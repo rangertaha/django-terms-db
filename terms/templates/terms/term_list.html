@@ -5,7 +5,7 @@
 {% block breadcrumb %}
     <ol class="breadcrumb">
         <li><a href="/">Apps</a></li>
-        <li><a href="{% url 'snippet-list' %}">Snippets</a></li>
+        <li><a href="{% url 'term-list' %}">Snippets</a></li>
     </ol>
 {% endblock %}
 
@@ -51,7 +51,7 @@
     }
 </style>
 
-{% include 'snippets/snippets/search.html' %}
+{% include 'snippets/terms/search.html' %}
 <div class="list-group">
     {% for obj in object_list %}
     <div class="media">
@@ -61,7 +61,7 @@
         <div class="media-body">
             <h4 class="media-heading">
 
-                <a href="{% url 'snippet-detail' obj.slug %}">{{ obj.title }}</a>
+                <a href="{% url 'term-detail' obj.slug %}">{{ obj.title }}</a>
             </h4>
             <p class="text-success" style="margin-bottom: 2px;">{{ obj.usage|default:obj.code|truncatechars:50 }}</p>
             <p class="text-muted" style="margin-bottom: 2px;">{{ obj.description }}</p>
