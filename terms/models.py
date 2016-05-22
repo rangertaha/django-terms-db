@@ -51,7 +51,7 @@ class Term(models.Model):
         ordering = ('rank',)
 
     def __unicode__(self):
-        return self.title
+        return self.short
 
 
 @receiver(pre_save, sender=Term)
@@ -59,7 +59,7 @@ def pre_term(sender, **kwargs):
     term = kwargs['instance']
     if not term.slug:
         term.slug = slugify(term.long)
-        term.alphabet()
+
 
 
 @receiver(pre_save, sender=Category)

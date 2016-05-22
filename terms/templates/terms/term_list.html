@@ -51,7 +51,22 @@
     }
 </style>
 
-{% include 'terms/snippets/search.html' %}
+
+    {% regroup object_list by alphabet as terms %}
+
+<ul>
+{% for term in terms %}
+    <li>{{ term.grouper }}
+    <ul>
+        {% for item in term.list %}
+          <li>{{ item.short }}: {{ item.description }} {{ item }}</li>
+        {% endfor %}
+    </ul>
+    </li>
+{% endfor %}
+</ul>
+
+{% comment %}
 <div class="list-group">
     {% for obj in object_list %}
     <div class="media">
@@ -81,6 +96,6 @@
 
     {% endfor %}
 </div>
-
+{% endcomment %}
 {% include 'snippets/pagination.html' %}
 {% endblock %}
