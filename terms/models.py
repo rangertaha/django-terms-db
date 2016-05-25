@@ -35,7 +35,7 @@ class Category(models.Model):
 class Term(models.Model):
     alphabet = models.CharField(max_length=4, blank=True, null=True, choices=ALPHABET_CHOICES)
     rank = models.IntegerField(blank=True, null=True, default=0)
-    slug = models.SlugField(max_length=512, unique=True, blank=True, null=True)
+    slug = models.SlugField(max_length=512, unique=False, blank=True, null=True)
     short = models.CharField(max_length=512, blank=True, null=True, db_index=True)
     long = models.CharField(max_length=512, blank=True, null=True, db_index=True)
     description = models.TextField(blank=True, null=True)
@@ -51,7 +51,7 @@ class Term(models.Model):
         ordering = ('rank',)
 
     def __unicode__(self):
-        return self.short
+        return self.id
 
 
 @receiver(pre_save, sender=Term)

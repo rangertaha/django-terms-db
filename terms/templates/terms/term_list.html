@@ -11,24 +11,6 @@
 
 {% block lsidebar %}
     <div class="sidebar-module">
-        <h4>Systems</h4>
-        <ol class="list-unstyled">
-            {% for obj in systems.all %}
-                <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
-            {% endfor %}
-        </ol>
-    </div>
-    <hr>
-    <div class="sidebar-module">
-        <h4>Applications</h4>
-        <ol class="list-unstyled">
-            {% for obj in applications.all %}
-                <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
-            {% endfor %}
-        </ol>
-    </div>
-    <hr>
-    <div class="sidebar-module">
         <h4>Categories</h4>
         <ol class="list-unstyled">
             {% for obj in categories.all %}
@@ -45,17 +27,11 @@
             margin-top: 0px;
             list-style: outside none none;
         }
-
         .alpha-menu > li {
             float: left;
             width: 100px;
-            -height: 80px;
-            -font-size: 10px;
-            -line-height: 1.4;
-            -text-align: center;
             background-color: transparent;
             margin: 10px;
-            -border-radius: 10px;
             border-bottom: 1px solid #a9a9a9;
 
         }
