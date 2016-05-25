@@ -51,7 +51,7 @@ class Term(models.Model):
         ordering = ('rank',)
 
     def __unicode__(self):
-        return self.id
+        return self.long
 
 
 @receiver(pre_save, sender=Term)

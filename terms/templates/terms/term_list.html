@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block navbar %}{% include 'snippets/navbar.html' %}{% endblock %}
+{% block navbar %}{% include 'snippets/navbar.html' with collapse=True %}{% endblock %}
 
 {% block breadcrumb %}
     <ol class="breadcrumb">
@@ -52,7 +52,7 @@
             <li><a href=""><h4>{{ term.grouper }}</h4></a>
                 <ul>
                     {% for item in term.list %}
-                        <li><a>{{ item.short }}</a></li>
+                        <li><a>{{ item.long }}</a></li>
                     {% endfor %}
                 </ul>
             </li>
