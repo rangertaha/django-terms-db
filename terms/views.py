@@ -15,9 +15,27 @@ class TermViewDetail(DetailView):
         return context
 
 
+class TermViewAlphabetList(ListView):
+    model = Term
+    template_name = 'term_list.html'
+    paginate_by = 100
+
+    def get_queryset(self):
+        if self.kwargs['alphabet']:
+            return self.model.objects.filter(
+                long__startswith=self.kwargs['alphabet']).distinct()
+        else:
+            return self.model.objects.filter(
+                long__icontains='a').distinct()
+
+
+    def get_context_data(self, **kwargs):
+        context = super(TermViewAlphabetList, self).get_context_data(**kwargs)
+        context['alphabet'] = self.kwargs.get('alphabet', 'a')
+        return context
+
 class TermViewList(ListView):
     model = Term
-    paginate_by = 10
 
     def get_queryset(self):
         if self.request.GET.get('q'):

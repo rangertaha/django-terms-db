@@ -4,8 +4,32 @@
 
 {% block breadcrumb %}
     <ol class="breadcrumb">
-        <li><a href="/">Apps</a></li>
-        <li><a href="{% url 'snippet-list' %}">Snippets</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'a' %}">A</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'b' %}">B</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'c' %}">C</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'd' %}">D</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'e' %}">E</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'f' %}">F</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'g' %}">G</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'h' %}">H</a></li>
+        <li><a href="{% url 'term-list' %}">I</a></li>
+        <li><a href="{% url 'term-list' %}">J</a></li>
+        <li><a href="{% url 'term-list' %}">K</a></li>
+        <li><a href="{% url 'term-list' %}">L</a></li>
+        <li><a href="{% url 'term-list' %}">M</a></li>
+        <li><a href="{% url 'term-list' %}">N</a></li>
+        <li><a href="{% url 'term-list' %}">O</a></li>
+        <li><a href="{% url 'term-list' %}">P</a></li>
+        <li><a href="{% url 'term-list' %}">Q</a></li>
+        <li><a href="{% url 'term-list' %}">R</a></li>
+        <li><a href="{% url 'term-list' %}">R</a></li>
+        <li><a href="{% url 'term-list' %}">T</a></li>
+        <li><a href="{% url 'term-list' %}">U</a></li>
+        <li><a href="{% url 'term-list' %}">V</a></li>
+        <li><a href="{% url 'term-list' %}">W</a></li>
+        <li><a href="{% url 'term-list' %}">X</a></li>
+        <li><a href="{% url 'term-list' %}">Y</a></li>
+        <li><a href="{% url 'term-list' %}">Z</a></li>
     </ol>
 {% endblock %}
 
@@ -14,7 +38,7 @@
     <h4>Systems</h4>
     <ol class="list-unstyled">
         {% for obj in systems.all %}
-        <li><span class="badge">{{ obj.count }}</span>&nbsp;{{ obj.name }}</li>
+        <li><span class="badge">{{ obj.count }} </span>&nbsp;{{ obj.name }}</li>
         {% endfor %}
     </ol>
 </div>
@@ -51,22 +75,11 @@
     }
 </style>
 <div class="page-header" style="margin: 5px 5px;">
-    <h1 style="margin: 5px 5px;">Snippets
-        <small>For Hacking</small>
-    </h1>
+    <h1 style="margin: 5px 5px;">{{ object.short|default:'' }}&nbsp;<small>{{ object.long|default:'' }}</small></h1>
 </div>
-{% include 'snippets/snippets/search.html' %}
 
-<div class="page-header">
-    <h1 style="font-size: 25px;">{{ object.title }}</h1>
-    <h2>
-        <small style="font-size: 14px;">{{ object.usage|default:'' }}</small>
-    </h2>
-</div>
-<pre>{{ object.code }}</pre>
 <p>{{ object.description|default:'' }}</p>
-{% if object.example %}<h4>Example</h4>{% endif %}
-<p>{{ object.example|default:'' }}</p>
+
 
 
 {% if object.system %}
