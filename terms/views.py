@@ -8,6 +8,7 @@ from .serializers import TermSerializer, CategorySerializer
 
 class TermViewDetail(DetailView):
     model = Term
+    paginate_by = 100
 
     def get_context_data(self, **kwargs):
         context = super(TermViewDetail, self).get_context_data(**kwargs)
