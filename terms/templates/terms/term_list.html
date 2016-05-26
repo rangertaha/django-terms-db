@@ -12,28 +12,29 @@
         <li><a href="{% url 'term-alphabet-list' 'f' %}">F</a></li>
         <li><a href="{% url 'term-alphabet-list' 'g' %}">G</a></li>
         <li><a href="{% url 'term-alphabet-list' 'h' %}">H</a></li>
-        <li><a href="{% url 'term-list' %}">I</a></li>
-        <li><a href="{% url 'term-list' %}">J</a></li>
-        <li><a href="{% url 'term-list' %}">K</a></li>
-        <li><a href="{% url 'term-list' %}">L</a></li>
-        <li><a href="{% url 'term-list' %}">M</a></li>
-        <li><a href="{% url 'term-list' %}">N</a></li>
-        <li><a href="{% url 'term-list' %}">O</a></li>
-        <li><a href="{% url 'term-list' %}">P</a></li>
-        <li><a href="{% url 'term-list' %}">Q</a></li>
-        <li><a href="{% url 'term-list' %}">R</a></li>
-        <li><a href="{% url 'term-list' %}">R</a></li>
-        <li><a href="{% url 'term-list' %}">T</a></li>
-        <li><a href="{% url 'term-list' %}">U</a></li>
-        <li><a href="{% url 'term-list' %}">V</a></li>
-        <li><a href="{% url 'term-list' %}">W</a></li>
-        <li><a href="{% url 'term-list' %}">X</a></li>
-        <li><a href="{% url 'term-list' %}">Y</a></li>
-        <li><a href="{% url 'term-list' %}">Z</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'i' %}">I</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'j' %}">J</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'k' %}">K</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'l' %}">L</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'm' %}">M</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'n' %}">N</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'o' %}">O</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'p' %}">P</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'q' %}">Q</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'r' %}">R</a></li>
+        <li><a href="{% url 'term-alphabet-list' 's' %}">S</a></li>
+        <li><a href="{% url 'term-alphabet-list' 't' %}">T</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'u' %}">U</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'v' %}">V</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'w' %}">W</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'x' %}">X</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'y' %}">Y</a></li>
+        <li><a href="{% url 'term-alphabet-list' 'z' %}">Z</a></li>
     </ol>
 {% endblock %}
 
 {% block lsidebar %}
+    {% comment %}
     <div class="sidebar-module">
         <h4>Categories</h4>
         <ol class="list-unstyled">
@@ -42,6 +43,7 @@
             {% endfor %}
         </ol>
     </div>
+    {% endcomment %}
 {% endblock %}
 {% block rsidebar %}{% endblock %}
 

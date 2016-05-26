@@ -8,7 +8,6 @@ from .serializers import TermSerializer, CategorySerializer
 
 class TermViewDetail(DetailView):
     model = Term
-    paginate_by = 100
 
     def get_context_data(self, **kwargs):
         context = super(TermViewDetail, self).get_context_data(**kwargs)
@@ -19,7 +18,7 @@ class TermViewDetail(DetailView):
 class TermViewAlphabetList(ListView):
     model = Term
     template_name = 'term_list.html'
-    paginate_by = 100
+    paginate_by = 50
 
     def get_queryset(self):
         if self.kwargs['alphabet']:
@@ -37,12 +36,12 @@ class TermViewAlphabetList(ListView):
 
 class TermViewList(ListView):
     model = Term
+    paginate_by = 50
 
     def get_queryset(self):
         if self.request.GET.get('q'):
             return self.model.objects.filter(
-                active=True,
-                title__icontains=self.request.GET['q']).distinct()
+                long__icontains=self.request.GET['q']).distinct()
         else:
             return self.model.objects.all()
 
