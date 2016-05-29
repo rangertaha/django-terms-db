@@ -57,7 +57,7 @@
 
         </div>
         <div class="media-body">
-            <h4 class="media-heading"><a href="{% url 'term-detail' obj.slug %}">{{ obj.short|default:'' }}<smal>{{ obj.long }}</smal></a></h4>
+            <h4 class="media-heading"><a href="{% url 'term-detail' obj.pk obj.slug %}">{{ obj.short|default:'' }}<smal>{{ obj.long }}</smal></a></h4>
             <p class="" style="margin-bottom: 2px;">{{ obj.description }}</p>
         </div>
     </div>

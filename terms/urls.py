@@ -8,14 +8,10 @@ router = routers.DefaultRouter()
 router.register(r'terms', TermAPIViewSet)
 
 
-
 urlpatterns = [
     url(r'^api/', include(router.urls)),
 
     url(r'^$', TermViewList.as_view(), name='term-list'),
     url(r'^(?P<alphabet>\D)$', TermViewAlphabetList.as_view(), name='term-alphabet-list'),
-    url(r'^detail/(?P<slug>.*)$', TermViewDetail.as_view(), name='term-detail'),
+    url(r'^detail/(?P<pk>\d+)/(.*)$', TermViewDetail.as_view(), name='term-detail'),
 ]
-
-
-
