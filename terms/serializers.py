@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from rest_framework import serializers
 
 from .models import Term, Category
@@ -9,11 +8,11 @@ class TermSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Term
-        fields = ('rank', 'categories', 'title', 'code',
+        fields = ('rank', 'categories', 'short', 'long',
                   'description', 'created', 'updated')
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
-        fields = ('rank', 'slug', 'name', 'description')
+        fields = ('slug', 'name', 'count')

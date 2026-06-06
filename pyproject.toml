@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "django-terms-db"
+version = "0.0.1"
+description = "A Django app providing a database of terms to look up."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Rangertaha", email = "rangertaha@gmail.com" },
+]
+keywords = ["django", "terms", "glossary", "dictionary"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+]
+dependencies = [
+    "Django>=5.2,<6.0",
+    "djangorestframework>=3.16",
+]
+
+[project.urls]
+Homepage = "https://github.com/Rangertaha/django-terms-db"
+Repository = "https://github.com/Rangertaha/django-terms-db"
+
+[tool.hatch.build.targets.wheel]
+packages = ["terms"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/terms",
+    "/README.md",
+    "/LICENSE",
+]

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from django.conf.urls import url, include
+from django.urls import include, path, re_path
 from rest_framework import routers
 
 from .views import TermViewAlphabetList, TermViewList, TermViewDetail, TermAPIViewSet
@@ -9,9 +8,9 @@ router.register(r'terms', TermAPIViewSet)
 
 
 urlpatterns = [
-    url(r'^api/', include(router.urls)),
+    path('api/', include(router.urls)),
 
-    url(r'^$', TermViewList.as_view(), name='term-list'),
-    url(r'^(?P<alphabet>\D)$', TermViewAlphabetList.as_view(), name='term-alphabet-list'),
-    url(r'^detail/(?P<pk>\d+)/(.*)$', TermViewDetail.as_view(), name='term-detail'),
+    path('', TermViewList.as_view(), name='term-list'),
+    re_path(r'^(?P<alphabet>\D)$', TermViewAlphabetList.as_view(), name='term-alphabet-list'),
+    re_path(r'^detail/(?P<pk>\d+)/(.*)$', TermViewDetail.as_view(), name='term-detail'),
 ]

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.views.generic import ListView, DetailView
 from rest_framework import viewsets
 
@@ -10,7 +9,7 @@ class TermViewDetail(DetailView):
     model = Term
 
     def get_context_data(self, **kwargs):
-        context = super(TermViewDetail, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.filter().distinct()
         return context
 
@@ -30,7 +29,7 @@ class TermViewAlphabetList(ListView):
 
 
     def get_context_data(self, **kwargs):
-        context = super(TermViewAlphabetList, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['alphabet'] = self.kwargs.get('alphabet', 'a')
         return context
 
@@ -46,7 +45,7 @@ class TermViewList(ListView):
             return self.model.objects.all()
 
     def get_context_data(self, **kwargs):
-        context = super(TermViewList, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.filter().distinct()
         return context
 

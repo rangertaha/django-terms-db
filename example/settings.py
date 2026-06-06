@@ -1,11 +1,13 @@
-# -*- coding: utf-8 -*-
 # Django settings for example project.
 import os
 import sys
 
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
+ALLOWED_HOSTS = ['*'] if DEBUG else []
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APP = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PROJ_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -107,15 +109,14 @@ TEMPLATES = [
 ]
 
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
